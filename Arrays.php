@@ -95,7 +95,9 @@
         */
         $lettersArray = explode(",", $letters);
         /*
-        Para ordenar en orden descendiente el contenido del array, usamos la función arsort() indicando
+        Para ordenar en orden descendiente el contenido del array,
+        usamos la función arsort() que ordena al inverso las claves si son tipo texto (tipo númerico sería rsort())
+        indicando
         dentro del paréntesis el nombre del array.
         */
         arsort($lettersArray);
@@ -110,37 +112,34 @@
     <?php
         //Creamos un array asociativo para registrar las notas
         $notas = array("Miguel" => "5", "Luís" => "7", "Marta" => "10", "Isabel" => "8", "Aitor" => "4", "Pepe" => "1");
-        //Ordenamos el array en orden ascendente
-        sort($notas);
+        /*
+        Ordenamos los valores, es decir las notas, de las claves del array en orden de mayor a menor usando la función arsort() que
+        podemos ordenar si son tipo texto las claves (si la clave es tipo numerico sería sort() el que ordena los datos al inverso)
+        */
+        arsort($notas);
+        echo "Notas de los estudiantes: ";
         //Recorremos el array para imprimir la clave y el dato en cada vuelta
-        foreach ($notas as $estudiante => $value) {
-            echo " $estudiante: $value <br>";
+        foreach ($notas as $alumno => $nota) {
+            echo $alumno . ": " .$nota. " ";
         }    
         echo "<br>";
     ?>
     
     <h2>EJERCICIO 7</h2>    
     <?php
-        //Usamos el array del ejercicio anterior y hacemos la suma de todos las notas de los estudiantes
+        //Usamos el array del ejercicio anterior y hacemos la suma de todas las notas de los estudiantes
         $sumaNotas = array_sum($notas);
         //Para hacer la media del total de la suma, primero contamos cuantos estudiantes tenemos
         $totalAlumnos = count($notas);
         /*
-        Calculamos la media con los datos de las dos variables anteriores y guardamos el cálculo
-        en la nueva variable notasMedia
+        Calculamos la media con la función round() y redondeamos a 2 decimales
+        Para redondear hacemos la división con las variables anteriores y
+        separado por coma indicamos el número de decimales y
+        guardamos el cálculo en la nueva variable $notasMedia
         */
-        $notasMedia = $sumaNotas/$totalAlumnos;
-        /*
-        Para mostrar el valor de la variable $notasMedia solo con dos decimales, usamos la función bcdiv()
-        esta función redondea el valor haciendo una división para cortar decimales indicando num1, num2 y escala: 
-        - el num1 el que vamos a dividir, en este caso el nombre de la variable $notasMedia que queremos redondear,
-        - el num2 es un número por el que vamos dividir, elegimos el 1 para que no cambie su valor,
-        - la escala indica el total de decimales que queremos
-        Los tres valores separados por comas.
-        */
-        $mediaRedondeada = bcdiv($NotasMedia, '1', 2);
+        $notasMedia = round($sumaNotas/$totalAlumnos, 2);
         //Imprimimos resultado
-        echo "Media de las notas: $mediaRedondeada<br/>";
+        echo "Media de las notas: {$notasMedia} <br/>";
         //imprimimos el título del siguiente cálculo
         echo "Alumnos con nota por encima de la media:<br>";
         /*
@@ -152,8 +151,8 @@
         en este caso la nota del estudiante con que sea mayor que la notaMedia
         */
         foreach ($notas as $alumno => $nota) {
-            if ($nota > $notasMedia) {
-                echo $alumno . "<br>"; // Se imprimirá el nombre clave del array $notas (el dato es la nota)
+            if ($nota > $notasMedia) { // El dato es la nota que tiene el alumno $nota
+                echo $alumno . "<br>"; // Se imprimirá el nombre clave $alumno del array $notas, que es el nombre del alumno
             }  
         }
     ?>
